@@ -1,0 +1,32 @@
+{
+  "name": "Atmega328_IO",
+  "keywords": "cing, robot, educational, learn, tool, RobotCing, Robot Cing",
+  "description": "Arduino Library for educational robot Cing",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/RobotCing/Atmega328_IO.git"
+  },
+  "authors":
+  [
+    {
+      "name": "Stanislav Jochman",
+      "email": "s.jochman@gmail.com",
+      "url": "http://robotcing.sk/",
+      "maintainer": true
+    },
+    {
+      "name": "Veronika Nemjová",
+      "email": "robotcing@gmail.com"
+    }
+  ],
+  "dependencies":
+  {
+    "name": "Robot Cing",
+    "authors": "Stanislav Jochman, Veronika Nemjová",
+    "frameworks": "arduino"
+  },
+  "version": "3.1.8",
+  "frameworks": "arduino",
+  "platforms": "*"
+}

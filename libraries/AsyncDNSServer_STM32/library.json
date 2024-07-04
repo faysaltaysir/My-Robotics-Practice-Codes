@@ -1,0 +1,47 @@
+{
+  "name":"AsyncDNSServer_STM32",
+  "version": "1.1.1",
+  "description":"Asynchronous DNS Server Library for STM32F/L/H/G/WB/MP1 using LAN8720 or built-in LAN8742A Ethernet",
+  "keywords":"async,dnsserver,dns-server,udp,ethernet,LAN8720, LAN8742A, stm32, stm32f, stm32l, stm32h, stm32g, stm32wb, stm32mp1, ST STM32, bluepill, blackpill, f407ve, nucleo, nucleo-144",
+  "authors": [
+    {
+      "name": "Develo",
+      "url":   "https://github.com/devyte"
+    },
+    {
+      "name":  "Khoi Hoang",
+      "url":   "https://github.com/khoih-prog",
+      "email": "khoih.prog@gmail.com",
+      "maintainer": true
+    }  
+  ],
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/khoih-prog/AsyncDNSServer_STM32"
+  },
+  "license": "MIT",
+  "dependencies": 
+  [
+    {
+      "owner": "stm32duino",
+      "name": "STM32duino LwIP",
+      "version": "^2.1.2",
+      "platforms": ["ststm32"]
+    },
+    {
+      "owner": "stm32duino",
+      "name": "STM32Ethernet",
+      "version": "^1.2.0",
+      "platforms": ["ststm32"]
+    },
+    {
+      "owner": "khoih-prog",
+      "name": "AsyncUDP_STM32",
+      "version": "^1.2.1",
+      "platforms": ["ststm32"]
+    }
+  ],
+  "frameworks": "arduino",
+  "platforms": ["stm32", "ststm32"]
+}

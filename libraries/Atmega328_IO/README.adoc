@@ -1,0 +1,387 @@
+# Atmega328_IO Library for robot Cing #
+
+This library allows robot Cing to be programmed easily.
+
+For more information about this library please visit us at
+http://robotcing.wz.sk
+
+---
+
+## Atmega Libraries Functions
+
+### Cing.RunMotor()
+[Motor]
+
+#### Description
+
+Controls motor movement.
+
+#### Syntax
+
+`Cing.RunMotor(motor,state,mode)`
+
+#### Parameters
+
+motor: `"A"`, `"B"`, `"AB"`
+
+state: `0` or `1` or `-1` if digital mode is used. Positive values are used for forward, negative values are used for reverse.
+
+mode: `"digital"`
+
+---
+
+### Cing.ReadButtonExternal()
+
+[Sensor]
+
+
+#### Description
+
+Reads the value from external button, either `0` or `1`.
+
+
+#### Syntax
+
+`Cing.ReadButtonExternal()`
+
+
+#### Returns
+
+`0` if button is not pressed or `1` if button is pressed.
+
+---
+
+### Cing.ReadButton()
+
+[Build-in sensor]
+
+
+#### Description
+
+Reads the value from button, either `0` or `1`. When pressed changes value of `Cing.ReadButton()` to `1`.
+
+
+#### Syntax
+
+`Cing.ReadButton()`
+
+
+#### Returns
+
+`0` if button is not pressed or `1` if button is pressed.
+
+---
+
+### Cing.ReadPotentiometerExternal()
+[Sensor]
+
+#### Description
+
+Reads the value from external potentiometer.
+
+#### Syntax
+
+`Cing.ReadPotentiometerExternal()`
+
+#### Returns
+From `0` or `100` depending on potentiometer position.
+
+---
+
+### Cing.ReadPotentiometer()
+[Build-in sensor]
+
+#### Description
+
+Reads the value from potentiometer.
+
+#### Syntax
+
+`Cing.ReadPotentiometer()`
+
+#### Returns
+From `0` or `100` depending on potentiometer position.
+
+---
+
+### Cing.ReadLightSensor()
+
+[Sensor]
+
+
+#### Description
+
+Reads the value from light sensor.
+
+
+#### Syntax
+
+`Cing.ReadLightSensor(sensor,mode)`
+
+
+#### Parameters
+
+sensor: `1` or `2` used for selection of sensor.
+
+mode: `"digital"` or `"analog"`
+
+
+#### Returns
+
+From `0` to `100` in analog mode and either `0` or `1` in digital mode.
+
+---
+
+### Cing.ReadShineSensor()
+
+[Sensor]
+
+
+#### Description
+
+Reads the value from external shine sensor.
+
+
+#### Syntax
+
+`Cing.ReadShineSensor()`
+
+
+#### Returns
+
+From `0` or `100` depending on ambient light.
+
+---
+
+### Cing.ReadShineArray()
+
+[Build-in sensor]
+
+
+#### Description
+
+Reads the value from external shine sensor.
+
+
+#### Syntax
+
+`Cing.ReadShineArray(sensor)`
+
+#### Parameters
+
+sensor: `1` or `2` used for selection of sensor.
+
+#### Returns
+
+From `0` or `100` depending on ambient light.
+
+---
+
+### Cing.InitIR()
+
+[Build-in sensor]
+
+
+#### Description
+
+Prepares the data pin for IR input. This command should be used in `void setup(){}`.
+
+
+#### Syntax
+
+`Cing.InitIR(sensor)`
+
+---
+
+### Cing.ReadIR()
+
+[Build-in sensor]
+
+
+#### Description
+
+Reads the value from IR sensor.
+
+#### Syntax
+
+`Cing.ReadIR()`
+
+#### Returns
+
+From `1` to `15` depending on last button pressed.
+
+---
+
+### Cing.ReadTempSensor()
+
+[Sensor]
+
+
+#### Description
+
+Reads the value from external temperature sensor.
+
+
+#### Syntax
+
+`Cing.ReadTempSensor()`
+
+
+#### Returns
+
+Temperature in °C  from `-55` to `+125`.
+
+---
+### Cing.InitGyro()
+[Build-in sensor]
+
+#### Description
+
+Prepares gyro modul MPU6050. This command should be used in `void setup(){}`.
+
+#### Syntax
+
+`Cing.InitGyro(offsets)`
+
+#### Parameters
+
+offsets: `true` or `false`. Turns on or off calculating offsets. This parameter is optional and leaving it `false` is recommended.
+
+---
+### Cing.ReadGyro()
+[Build-in sensor]
+
+#### Description
+
+Reads the value from Gyro and accelerometer.
+
+#### Syntax
+
+`Cing.ReadGyro(axis,mode)`
+
+#### Parameters
+
+axis: `x` or `y` or `z`.
+
+mode: `angle`, `accelerometer`
+
+
+#### Returns
+If `angle` is choosed angle is returned in °. When `accelerometer` is choosed acceleration in G is returned .
+
+---
+
+### Cing.InitLed()
+
+[LED]
+
+
+#### Description
+
+Prepares the data pin for WS2812 output. This command should be used in `void setup(){}`.
+
+#### Syntax
+
+`Cing.InitLed()`
+
+---
+
+### Cing.SetLedColor()
+
+[LED]
+
+
+#### Description
+
+Sets color of WS2812.
+
+#### Syntax
+
+`Cing.SetLedColor(led,red,green,blue)`
+
+#### Parameters
+
+led: Led number which you want to set color. Firt led starts at index `1`.
+red: Red value in % from `0` to `100`.
+green: Green value in % from `0` to `100`.
+blue: Blue value in % from `0` to `100`.
+
+---
+
+### Cing.ShowLed()
+
+[LED]
+
+
+#### Description
+
+Display set color of WS2812.
+
+#### Syntax
+
+`Cing.ShowLed()`
+
+---
+
+### Cing.InitTest()
+
+[LED]
+
+
+#### Description
+
+Prepares Cing board for testing. This command should be used in `void setup(){}`.
+
+#### Syntax
+
+`Cing.InitTest()`
+
+---
+
+### Cing.Test()
+
+[LED]
+
+
+#### Description
+
+Starts testing of Cing board. This command should be used in `void loop(){}`.
+
+#### Syntax
+
+`Cing.Test()`
+
+---
+
+### Cing.ReadUltrasonicSensor()
+
+[Sensor]
+
+
+#### Description
+
+Reads the value from external ultrasonic sensor.
+
+
+#### Syntax
+
+`Cing.ReadUltrasonicSensor()`
+
+
+#### Returns
+
+Distance in mm from `0` to `400`.
+
+---
+
+## License ##
+
+Copyright © 2019 RobotCing Team. All right reserved.
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MQTT Tutorial</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row">
+    <h1>Send Your name or message</h1>
+    <br><br><br><br><br><br><br><br><br>
+    <div class="col-12">
+        <input type="text" class="form-control" id="messageInput" placeholder="Enter your message">
+        <button type="submit" class="btn btn-success" id="sendButton">Send Message</button>
+    </div>
+    <!-- <div class="col-6">
+      <input type="range" id="redLed" min="0" max="255" value="0" />
+    </div> -->
+
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header">Temperature</div>
+        <div class="card-body d-flex justify-content-center">
+          <span id="tm"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="col-4">
+      <div class="card">
+        <div class="card-header">Humidity</div>
+        <div class="card-body d-flex justify-content-center">
+          <span id="hm"></span>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>
+<style>
+  /* Dark mode */
+  .dark-mode {
+    background-color: #333; /* Dark background color */
+    color: #fff; /* Light text color */
+  }
+
+  /* Light mode */
+  .light-mode {
+    background-color: #fff; /* Light background color */
+    color: #333; /* Dark text color */
+  }
+</style>
+
+<script>
+  var reciveTopic = "Taysir/Send";
+  var sendTopic = "Taysir/Receive";
+  var connection = false;
+
+  client = new Paho.MQTT.Client("broker.hivemq.com", 8000, "1709009Aidid");
+
+  function onConnect() {
+    connection = true;
+    client.subscribe(reciveTopic);
+    console.log("connected");
+  }
+
+  function onConnectionLost() {
+    connection = false;
+
+    if (responseObject.errorCode !== 0) {
+      client.connect({ onSuccess: onConnect });
+    }
+  }
+
+  function onMessageArrived(message) {
+    var data = message.payloadString;
+    if (data.includes("temperature")) {
+        var tm = data.substring("temperature".length, data.length);
+        $("#tm").html(tm);
+        console.log("tem");
+
+        // Change background color to blue when temperature data is received
+        // $("body").css("background-color", "blue");
+    }
+
+    if (data.includes("humidity")) {
+        var hm = data.substring("humidity".length, data.length);
+        $("#hm").html(hm);
+        console.log("hum");
+
+        // Check the value of humidity
+        var humidityValue = parseInt(hm); // Convert to integer
+        if (humidityValue === 1) {
+            // If humidityValue is 1, set light mode
+            $("body").removeClass("dark-mode").addClass("light-mode");
+        } else if (humidityValue === 0) {
+            // If humidityValue is 0, set dark mode
+            $("body").removeClass("light-mode").addClass("dark-mode");
+        }
+    }
+}
+
+
+  client.connect({ onSuccess: onConnect });
+  client.onMessageArrived = onMessageArrived;
+  client.onConnectionLost = onConnectionLost;
+
+  $("#sendButton").click(function () {
+    if ($("#messageInput").val() && connection) {
+      message = new Paho.MQTT.Message($("#messageInput").val());
+      message.destinationName = sendTopic;
+      client.send(message);
+      $("#messageInput").val("");
+    }
+  });
+
+  $("#redLed").on("change", function () {
+    if (connection) {
+      message = new Paho.MQTT.Message("ledred" + $("#redLed").val());
+      message.destinationName = sendTopic;
+      client.send(message);
+    }
+  });
+
+</script>
+</body>
+</html>
